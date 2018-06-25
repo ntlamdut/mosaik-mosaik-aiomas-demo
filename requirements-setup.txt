@@ -1,0 +1,8 @@
+aiomas[mpb]
+click
+flake8
+mosaik
+mosaik-api
+mosaik-hdf5
+numpy
+pytest

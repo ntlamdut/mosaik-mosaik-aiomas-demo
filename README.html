@@ -1,0 +1,600 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.12: http://docutils.sourceforge.net/" />
+<title>How to couple aiomas with mosaik</title>
+<style type="text/css">
+
+/*
+:Author: David Goodger (goodger@python.org)
+:Id: $Id: html4css1.css 7614 2013-02-21 15:55:51Z milde $
+:Copyright: This stylesheet has been placed in the public domain.
+
+Default cascading style sheet for the HTML output of Docutils.
+
+See http://docutils.sf.net/docs/howto/html-stylesheets.html for how to
+customize this style sheet.
+*/
+
+/* used to remove borders from tables and images */
+.borderless, table.borderless td, table.borderless th {
+  border: 0 }
+
+table.borderless td, table.borderless th {
+  /* Override padding for "table.docutils td" with "! important".
+     The right padding separates the table cells. */
+  padding: 0 0.5em 0 0 ! important }
+
+.first {
+  /* Override more specific margin styles with "! important". */
+  margin-top: 0 ! important }
+
+.last, .with-subtitle {
+  margin-bottom: 0 ! important }
+
+.hidden {
+  display: none }
+
+a.toc-backref {
+  text-decoration: none ;
+  color: black }
+
+blockquote.epigraph {
+  margin: 2em 5em ; }
+
+dl.docutils dd {
+  margin-bottom: 0.5em }
+
+object[type="image/svg+xml"], object[type="application/x-shockwave-flash"] {
+  overflow: hidden;
+}
+
+/* Uncomment (and remove this text!) to get bold-faced definition list terms
+dl.docutils dt {
+  font-weight: bold }
+*/
+
+div.abstract {
+  margin: 2em 5em }
+
+div.abstract p.topic-title {
+  font-weight: bold ;
+  text-align: center }
+
+div.admonition, div.attention, div.caution, div.danger, div.error,
+div.hint, div.important, div.note, div.tip, div.warning {
+  margin: 2em ;
+  border: medium outset ;
+  padding: 1em }
+
+div.admonition p.admonition-title, div.hint p.admonition-title,
+div.important p.admonition-title, div.note p.admonition-title,
+div.tip p.admonition-title {
+  font-weight: bold ;
+  font-family: sans-serif }
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title, .code .error {
+  color: red ;
+  font-weight: bold ;
+  font-family: sans-serif }
+
+/* Uncomment (and remove this text!) to get reduced vertical space in
+   compound paragraphs.
+div.compound .compound-first, div.compound .compound-middle {
+  margin-bottom: 0.5em }
+
+div.compound .compound-last, div.compound .compound-middle {
+  margin-top: 0.5em }
+*/
+
+div.dedication {
+  margin: 2em 5em ;
+  text-align: center ;
+  font-style: italic }
+
+div.dedication p.topic-title {
+  font-weight: bold ;
+  font-style: normal }
+
+div.figure {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+div.footer, div.header {
+  clear: both;
+  font-size: smaller }
+
+div.line-block {
+  display: block ;
+  margin-top: 1em ;
+  margin-bottom: 1em }
+
+div.line-block div.line-block {
+  margin-top: 0 ;
+  margin-bottom: 0 ;
+  margin-left: 1.5em }
+
+div.sidebar {
+  margin: 0 0 0.5em 1em ;
+  border: medium outset ;
+  padding: 1em ;
+  background-color: #ffffee ;
+  width: 40% ;
+  float: right ;
+  clear: right }
+
+div.sidebar p.rubric {
+  font-family: sans-serif ;
+  font-size: medium }
+
+div.system-messages {
+  margin: 5em }
+
+div.system-messages h1 {
+  color: red }
+
+div.system-message {
+  border: medium outset ;
+  padding: 1em }
+
+div.system-message p.system-message-title {
+  color: red ;
+  font-weight: bold }
+
+div.topic {
+  margin: 2em }
+
+h1.section-subtitle, h2.section-subtitle, h3.section-subtitle,
+h4.section-subtitle, h5.section-subtitle, h6.section-subtitle {
+  margin-top: 0.4em }
+
+h1.title {
+  text-align: center }
+
+h2.subtitle {
+  text-align: center }
+
+hr.docutils {
+  width: 75% }
+
+img.align-left, .figure.align-left, object.align-left {
+  clear: left ;
+  float: left ;
+  margin-right: 1em }
+
+img.align-right, .figure.align-right, object.align-right {
+  clear: right ;
+  float: right ;
+  margin-left: 1em }
+
+img.align-center, .figure.align-center, object.align-center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.align-left {
+  text-align: left }
+
+.align-center {
+  clear: both ;
+  text-align: center }
+
+.align-right {
+  text-align: right }
+
+/* reset inner alignment in figures */
+div.align-right {
+  text-align: inherit }
+
+/* div.align-center * { */
+/*   text-align: left } */
+
+ol.simple, ul.simple {
+  margin-bottom: 1em }
+
+ol.arabic {
+  list-style: decimal }
+
+ol.loweralpha {
+  list-style: lower-alpha }
+
+ol.upperalpha {
+  list-style: upper-alpha }
+
+ol.lowerroman {
+  list-style: lower-roman }
+
+ol.upperroman {
+  list-style: upper-roman }
+
+p.attribution {
+  text-align: right ;
+  margin-left: 50% }
+
+p.caption {
+  font-style: italic }
+
+p.credits {
+  font-style: italic ;
+  font-size: smaller }
+
+p.label {
+  white-space: nowrap }
+
+p.rubric {
+  font-weight: bold ;
+  font-size: larger ;
+  color: maroon ;
+  text-align: center }
+
+p.sidebar-title {
+  font-family: sans-serif ;
+  font-weight: bold ;
+  font-size: larger }
+
+p.sidebar-subtitle {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+p.topic-title {
+  font-weight: bold }
+
+pre.address {
+  margin-bottom: 0 ;
+  margin-top: 0 ;
+  font: inherit }
+
+pre.literal-block, pre.doctest-block, pre.math, pre.code {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+pre.code .ln { color: grey; } /* line numbers */
+pre.code, code { background-color: #eeeeee }
+pre.code .comment, code .comment { color: #5C6576 }
+pre.code .keyword, code .keyword { color: #3B0D06; font-weight: bold }
+pre.code .literal.string, code .literal.string { color: #0C5404 }
+pre.code .name.builtin, code .name.builtin { color: #352B84 }
+pre.code .deleted, code .deleted { background-color: #DEB0A1}
+pre.code .inserted, code .inserted { background-color: #A3D289}
+
+span.classifier {
+  font-family: sans-serif ;
+  font-style: oblique }
+
+span.classifier-delimiter {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+span.interpreted {
+  font-family: sans-serif }
+
+span.option {
+  white-space: nowrap }
+
+span.pre {
+  white-space: pre }
+
+span.problematic {
+  color: red }
+
+span.section-subtitle {
+  /* font-size relative to parent (h1..h6 element) */
+  font-size: 80% }
+
+table.citation {
+  border-left: solid 1px gray;
+  margin-left: 1px }
+
+table.docinfo {
+  margin: 2em 4em }
+
+table.docutils {
+  margin-top: 0.5em ;
+  margin-bottom: 0.5em }
+
+table.footnote {
+  border-left: solid 1px black;
+  margin-left: 1px }
+
+table.docutils td, table.docutils th,
+table.docinfo td, table.docinfo th {
+  padding-left: 0.5em ;
+  padding-right: 0.5em ;
+  vertical-align: top }
+
+table.docutils th.field-name, table.docinfo th.docinfo-name {
+  font-weight: bold ;
+  text-align: left ;
+  white-space: nowrap ;
+  padding-left: 0 }
+
+/* "booktabs" style (no vertical lines) */
+table.docutils.booktabs {
+  border: 0px;
+  border-top: 2px solid;
+  border-bottom: 2px solid;
+  border-collapse: collapse;
+}
+table.docutils.booktabs * {
+  border: 0px;
+}
+table.docutils.booktabs th {
+  border-bottom: thin solid;
+  text-align: left;
+}
+
+h1 tt.docutils, h2 tt.docutils, h3 tt.docutils,
+h4 tt.docutils, h5 tt.docutils, h6 tt.docutils {
+  font-size: 100% }
+
+ul.auto-toc {
+  list-style-type: none }
+
+</style>
+</head>
+<body>
+<div class="document" id="how-to-couple-aiomas-with-mosaik">
+<h1 class="title">How to couple <em>aiomas</em> with <em>mosaik</em></h1>
+
+<p>This example project demonstrates how you can couple a multi-agent system (MAS)
+written in <a class="reference external" href="https://aiomas.readthedocs.io/">aiomas</a> to a <a class="reference external" href="https://mosaik.readthedocs.io/">mosaik</a> simulation.</p>
+<p>What gets covered here?</p>
+<ul class="simple">
+<li>Writing a simple, controllable simulator and coupling it with mosaik using
+the <a class="reference external" href="https://mosaik.readthedocs.io/en/latest/mosaik-api/high-level.html">mosaik-api</a> package</li>
+<li>Writing a <em>simple</em> MAS with aiomas and couple it <em>without</em> using the
+<em>mosaik-api</em> package, including:<ul>
+<li>Distributing agents over multiple CPU cores</li>
+<li>Managing agents and time in remote containers</li>
+<li>Forward data from mosaik to your agents</li>
+<li>Collecting set-points/schedules from agents and send them to mosaik as
+input for the controlled simulator.</li>
+</ul>
+</li>
+</ul>
+<p>And what not?</p>
+<ul class="simple">
+<li>Packaging and Deployment of your system</li>
+<li>Testing (neither unit nor system/integration testing)</li>
+<li>Fancy distributed algorithms</li>
+<li>Fancy agent architecture that makes it easy to change the planning algorithm
+or lets agents communicate with simulated models or real resources.</li>
+</ul>
+<p>This document explains how to install and run the example project.  It also
+gives you a rough idea how the scenario looks like and discusses the basic
+ideas behind the controlled simulator and the controlling multi-agent system.
+In-depth comments and discussions are within the source code itself, because
+you have to read it anyways if you want to learn something.  :)</p>
+<div class="section" id="contents">
+<h1>Contents</h1>
+<ul class="simple">
+<li><a class="reference internal" href="#scenario">Scenario</a></li>
+<li><a class="reference internal" href="#id2">Installation and execution</a></li>
+<li><a class="reference internal" href="#id4">The WECS simulator explained</a></li>
+<li><a class="reference internal" href="#id5">The MAS explained</a></li>
+<li><a class="reference internal" href="#id6">The mosaik scenario explained</a></li>
+</ul>
+</div>
+<div class="section" id="id1">
+<span id="scenario"></span><h1>Scenario</h1>
+<p>The simulation consists of three components:</p>
+<ul class="simple">
+<li>A wind energy conversion system (WECS) simulator</li>
+<li>A multi-agent system with on agent for each simulated WECS and one central
+controller agent</li>
+<li>An HDF database “simulator” that collects some data from the WECS simulator</li>
+</ul>
+<p>In this scenario, the WECS form a small wind farm.  The agents observe the
+power output of their WECS.  A controlling agent regularly collects the current
+feed-in from the WECS agents and checks if it is above a certain <em>maximum power
+feed-in</em> for the wind farm.  If the combined power output of the WECS is above
+the limit, the controller calculates the maximum allowed power output for each
+WECS and sends it to the WECS agents which forward it to the actual WECS.</p>
+<p>A database collects the wind speed, active power output and the power limit
+for each simulated WECS.</p>
+<p>This scenario is actually very dumb, bit it has all the data-flows that you are
+gonna have in a “real” project.</p>
+</div>
+<div class="section" id="id2">
+<span id="installation-and-execution"></span><h1>Installation and execution</h1>
+<p>This example projects requires Python 3.  In order to install some of the
+required packages (like NumPy or h5py), you may need a compiler (or Download
+a Windows binary from <a class="reference external" href="http://www.lfd.uci.edu/~gohlke/pythonlibs/">Christoph Gohlke’s site</a>).</p>
+<p>If you have a compiler and everything (if not, more details follow below),
+create a Python 3.5 <a class="reference external" href="https://www.dabapps.com/blog/introduction-to-pip-and-virtualenv-python/">virtualenv</a> and install all dependencies:</p>
+<pre class="code console literal-block">
+<span class="generic prompt">$</span> pip install -r requirements-setup.txt
+</pre>
+<p>You can then run the simulation by executing:</p>
+<pre class="code console literal-block">
+<span class="generic prompt">$</span> python scenario.py
+<span class="generic output">Starting &quot;WecsSim&quot; as &quot;WecsSim-0&quot; ...
+Starting &quot;MAS&quot; as &quot;MAS-0&quot; ...
+Starting &quot;DB&quot; as &quot;DB-0&quot; ...
+INFO:mosaik_api:Starting MosaikHdf5 ...
+Starting simulation.
+Simulation finished successfully.</span>
+</pre>
+<p>If this doesn’t work, try to re-install all dependencies from
+<tt class="docutils literal">requirements.txt</tt> which contains a complete list of all packages with pinned
+version numbers:</p>
+<pre class="code console literal-block">
+<span class="generic prompt">$</span> pip install requirements.txt
+</pre>
+<div class="section" id="detailed-instructions">
+<h2>Detailed instructions</h2>
+<p>The following sub-sections provide detailed installation instructions for
+Linux, OS X and Windows.</p>
+<div class="section" id="linux">
+<h3>Linux</h3>
+<p>The following instructions were mainly tested on Ubuntu 16.04.  For older
+releases or other distributions, the set of dependencies that you need to
+install may vary:</p>
+<pre class="code console literal-block">
+<span class="generic prompt">$</span> sudo apt install python3 python3-dev python3-pip build-essential libhdf5-dev libmsgpack-dev
+</pre>
+<div class="hint">
+<p class="first admonition-title">Hint</p>
+<p class="last">If you have an older version of Ubuntu, you need to install Python 3.5 from
+a PPA.  <a class="reference external" href="https://askubuntu.com/questions/682869/install-python-3-5-on-vivid-using-apt-get/682875#682875">This answer on Askubuntu</a> explains how to do this (don’t forget to
+also install <tt class="docutils literal"><span class="pre">python3.5-dev</span></tt>.  You should also install
+<tt class="docutils literal"><span class="pre">libatlas-base-dev</span></tt> prior to compiling NumPy.</p>
+</div>
+<p>Furthermore, we need virtualenv which can create isolated Python environments
+for different projects.  We'll also install <em>virtualenvwrapper</em> which
+simplifies your life with virtualenvs:</p>
+<pre class="code console literal-block">
+<span class="generic prompt">$</span> sudo python3 -m pip install -U pip virtualenv virtualenvwrapper
+<span class="generic prompt">$</span> <span class="comment single"># Update your bashrc to load venv. wrapper automatically:
+</span><span class="generic prompt">$</span><span class="comment single"></span> <span class="name builtin">echo</span> <span class="literal string double">&quot;# Virtualenvwrapper&quot;</span> &gt;&gt; ~/.bashrc
+<span class="generic prompt">$</span> <span class="name builtin">echo</span> <span class="literal string double">&quot;export VIRTUALENVWRAPPER_PYTHON=`which python3`&quot;</span> &gt;&gt; ~/.bashrc
+<span class="generic prompt">$</span> <span class="name builtin">echo</span> <span class="literal string double">&quot;. </span><span class="keyword">$(</span>which virtualenvwrapper.sh<span class="keyword">)</span><span class="literal string double">&quot;</span> &gt;&gt; ~/.bashrc
+<span class="generic prompt">$</span> . ~/.bashrc
+</pre>
+<p>Now you can create a new virtualenv, <tt class="docutils literal">cd</tt> into the project directory (the one
+containing <em>this</em> file), and install all requirements:</p>
+<pre class="code console literal-block">
+<span class="generic prompt">$</span> mkvirtualenv --python<span class="operator">=</span>python3.5 mosaik-aiomas-demo
+<span class="generic prompt">(mosaik-aiomas-demo)$</span> <span class="name builtin">export</span> <span class="name variable">HDF5_DIR</span><span class="operator">=</span>/usr/lib/x86_64-linux-gnu/hdf5/serial/
+<span class="generic prompt">(mosaik-aiomas-demo)$</span> <span class="name builtin">cd</span> mosaik-aiomas-demo/
+<span class="generic prompt">(mosaik-aiomas-demo)$</span> pip install -r requirements-setup.txt
+</pre>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">Exporting the environment variable <em>HDF5_DIR</em> may not be necessary in all
+cases (e.g., if you use Ubuntu 14.04), but it also does not hurt.</p>
+</div>
+<p>Now you should be able to run the mosaik scenario:</p>
+<pre class="code console literal-block">
+<span class="generic prompt">(mosaik-aiomas-demo)$</span> python scenario.py
+</pre>
+</div>
+<div class="section" id="os-x">
+<h3>OS X</h3>
+<p>OS X ships with an outdated version of Python.  The best/easiest way to install
+Python 3.5 and other dependencies is to use <a class="reference external" href="http://brew.sh/">Homebrew</a>.  Open a terminal window
+and run the following command:</p>
+<pre class="code console literal-block">
+<span class="generic prompt">$</span> /usr/bin/ruby -e <span class="literal string double">&quot;</span><span class="keyword">$(</span>curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install<span class="keyword">)</span><span class="literal string double">&quot;</span>
+</pre>
+<p>Once the installation is successful, you can install Python 3 and the build
+dependencies:</p>
+<pre class="code console literal-block">
+<span class="generic prompt">$</span> brew install python3 hdf5 msgpack
+</pre>
+<p>Furthermore, we need virtualenv which can create isolated Python environments
+for different projects.  We'll also install <em>virtualenvwrapper</em> which
+simplifies your life with virtualenvs:</p>
+<pre class="code console literal-block">
+<span class="generic prompt">$</span> python3 -m pip install -U virtualenv virtualenvwrapper
+<span class="generic prompt">$</span> <span class="comment single"># Update your bashrc to load venv. wrapper automatically:
+</span><span class="generic prompt">$</span><span class="comment single"></span> <span class="name builtin">echo</span> <span class="literal string double">&quot;# Virtualenvwrapper&quot;</span> &gt;&gt; ~/.bashrc
+<span class="generic prompt">$</span> <span class="name builtin">echo</span> <span class="literal string double">&quot;export VIRTUALENVWRAPPER_PYTHON=`which python3`&quot;</span> &gt;&gt; ~/.bashrc
+<span class="generic prompt">$</span> <span class="name builtin">echo</span> <span class="literal string double">&quot;. </span><span class="keyword">$(</span>which virtualenvwrapper.sh<span class="keyword">)</span><span class="literal string double">&quot;</span> &gt;&gt; ~/.bashrc
+<span class="generic prompt">$</span> . ~/.bashrc
+</pre>
+<p>Now you can create a new virtualenv, <tt class="docutils literal">cd</tt> into the project directory (the one
+containing <em>this</em> file), and install all requirements:</p>
+<pre class="code console literal-block">
+<span class="generic prompt">$</span> mkvirtualenv -p python3.5 mosaik-aiomas-demo
+<span class="generic prompt">(mosaik-aiomas-demo)$</span> <span class="name builtin">cd</span> mosaik-aiomas-demo/
+<span class="generic prompt">(mosaik-aiomas-demo)$</span> pip install -r requirements-setup.txt
+</pre>
+<p>Now you should be able to run the mosaik scenario:</p>
+<pre class="code console literal-block">
+<span class="generic prompt">(mosaik-aiomas-demo)$</span> python scenario.py
+</pre>
+</div>
+<div class="section" id="windows">
+<h3>Windows</h3>
+<p>Download the latest Python (&gt;= 3.5) Windows installer (preferably, 64bit) from
+<a class="reference external" href="https://www.python.org/downloads/">python.org</a> and run it.  Check the checkbox <em>Add Python 3.5 to PATH</em>.
+Remember whether you installed the 32bit or 64bit version.</p>
+<p>Then go to Christoph Gohlke’s website and download the latest version of
+<a class="reference external" href="http://www.lfd.uci.edu/~gohlke/pythonlibs/#blosc">blosc</a>, <a class="reference external" href="http://www.lfd.uci.edu/~gohlke/pythonlibs/#msgpack">msgpack</a>, <a class="reference external" href="http://www.lfd.uci.edu/~gohlke/pythonlibs/#numpy">numpy</a>, and <a class="reference external" href="http://www.lfd.uci.edu/~gohlke/pythonlibs/#h5py">h5py</a>.  Select a version matching your Python
+version and bit-ness (e.g. <tt class="docutils literal"><span class="pre">*-cp35-cp35m-win_amd64.whl</span></tt>).</p>
+<p>Then start a windows command prompt.</p>
+<p>We need virtualenv which can create isolated Python environments
+for different projects.  We'll also install <em>virtualenvwrapper-win</em> which
+simplifies your life with virtualenvs:</p>
+<pre class="code doscon literal-block">
+<span class="generic prompt">C:\Users\monty&gt;</span> python -m pip install -U virtualenv virtualenvwrapper-win
+</pre>
+<p>Now you can create a new virtualenv, <tt class="docutils literal">cd</tt> into the project directory (the one
+containing <em>this</em> file), and install all requirements:</p>
+<pre class="code doscon literal-block">
+<span class="generic prompt">C:\Users\monty&gt;</span> mkvirtualenv -p python3.5 mosaik-aiomas-demo
+<span class="generic prompt">C:\Users\monty&gt;</span> <span class="keyword">cd</span> mosaik-aiomas-demo
+<span class="generic prompt">(mosaik-aiomas-demo)C:\Users\monty\mosaik-aiomas-demo&gt;</span> pip install -f C:\Users\monty\Downloads -r requirements-setup.txt
+</pre>
+<p>Now you should be able to run the mosaik scenario:</p>
+<pre class="code doscon literal-block">
+<span class="generic prompt">(mosaik-aiomas-demo)C:\Users\monty\mosaik-aiomas-demo&gt;</span> python scenario.py
+</pre>
+</div>
+</div>
+<div class="section" id="id4">
+<span id="the-wecs-simulator-explained"></span><h2>The WECS simulator explained</h2>
+<p>You can find the wind energy conversion system (WECS) simulator in
+<tt class="docutils literal">src/wecssim/</tt>.</p>
+<p>The simulation model itself is define in <tt class="docutils literal">src/wecssim/wecs.py</tt>.  It only
+contains the class <tt class="docutils literal">wecssim.sim.WECS</tt> with the simulation model.</p>
+<p>The module <tt class="docutils literal">src/wecssim/mosaik.py</tt> implements the mosaik API for the
+simulator and also serves as an entry point: If you execute <tt class="docutils literal">PYTHONPATH=src/
+python <span class="pre">-m</span> wecssim.mosaik</tt>, the function is <tt class="docutils literal">wecssim.mosaik.main()</tt> is
+called.</p>
+<p>The mosaik documentation provides a <a class="reference external" href="https://mosaik.readthedocs.io/en/latest/mosaik-api/index.html">detailed description</a> of how all that
+works.</p>
+<p>There are also some tests for the WECS simulator.  They are located in the
+<tt class="docutils literal">tests/</tt> directory and can be run via pytest:</p>
+<pre class="code console literal-block">
+<span class="generic prompt">(mosaik-aiomas-demo)$</span> <span class="name variable">PYTHONPATH</span><span class="operator">=</span>src py.test
+</pre>
+</div>
+<div class="section" id="id5">
+<span id="the-mas-explained"></span><h2>The MAS explained</h2>
+<p>The MAS package in <tt class="docutils literal">src/mas/</tt> is a little more complex.</p>
+<p>The file <tt class="docutils literal">mosaik.py</tt> contains the entry point for starting the MAS.  It also
+implements the <a class="reference external" href="https://mosaik.readthedocs.org/en/latest/mosaik-api/low-level.html">low-level mosaik API</a> (the aiomas RPC layer in conjunction
+with the JSON codec uses the same network protocol as mosaik and so it is
+easier to directly implement the low-level API as an aiomas RPC service than
+using the high-level API).  <a class="reference external" href="http://click.pocoo.org/6/">Click</a> is used to parse the command lines passed to
+<tt class="docutils literal">mas.mosaik.main()</tt>.  Apart from the class <tt class="docutils literal">MosaikAPI</tt> which, as its name
+suggests, implements the mosaik API, there is also a <tt class="docutils literal">MosaikAgent</tt>.  That is
+an aiomas agent acting as a gateway between the mosaik API and the actual
+multi-agent system.</p>
+<p>The multi-agent system consists of multiple WECS agents (one for each simulated
+WECS) and a central controller agent.</p>
+<p>The <tt class="docutils literal">MosaikAgent</tt> and <tt class="docutils literal">Controller</tt> (found in <tt class="docutils literal">controller.py</tt>) run in the
+same container within the master process (the one that also serves the mosaik
+API).  For each CPU core on your machine, there will also be one sub-process
+with an agent container.  The <tt class="docutils literal">WECS</tt> agents will be evenly distributed over
+these remote containers.  This does not make a lot of sense in this scenario,
+but once your agents will actually perform more complicated (e.g., machine
+learning) tasks, this helps you to fully utilize all the computational power
+your CPU provides.  The container sub-processes are implemented in
+<tt class="docutils literal">container.py</tt>.</p>
+<p>All containers use the aiomas <em>ExternalClock</em> which is synchronized to the time
+of the mosaik simulation.  The MAS receive the current simulation time with
+each <tt class="docutils literal">step()</tt> call from mosaik.</p>
+</div>
+<div class="section" id="id6">
+<span id="the-mosaik-scenario-explained"></span><h2>The mosaik scenario explained</h2>
+<p>The scenario defined in <tt class="docutils literal">scenario.py</tt> is a standard mosaik scenario.  It
+defines a <tt class="docutils literal">main()</tt> that is executed when you run the script from the command
+line.</p>
+<p>It starts the three components involved in our simulation: the WECS simulator,
+the multi-agent system and an HDF5 database to collect some data.</p>
+<p>The wind data for the WECS simulator can be found in the CSV file in the
+<tt class="docutils literal">data/</tt> directory.  This is also the place where the HDF5 database will be
+created.</p>
+</div>
+</div>
+</div>
+</body>
+</html>
